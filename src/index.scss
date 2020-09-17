@@ -1,0 +1,68 @@
+$gray: #D6D6D6;
+$red: #AD0000;
+$yellow: #FDB10C;
+$orange: #F05A28;
+
+.messages-list {
+  width: 300px;
+
+  .message-item {
+    padding: 15px 0;
+    border-bottom: 1px solid $gray;
+    display: flex;
+    flex-direction: row;
+
+    .item-info {
+      width: 200px;
+
+      .amount {
+        margin-top: 5px;
+      }
+    }
+
+    .delete-btn {
+      color: $red;
+      height: 20px;
+      margin: auto 30px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .delete-btn-disabled {
+      color: $gray;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+
+    .add-msg-btn {
+      color: $orange;
+      margin: 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .multiple {
+    .title {
+      color: $yellow;
+    }
+
+    .item-content {
+      margin-left: 15px;
+    }
+  }
+
+  .custom {
+    margin-left: 30px;
+  }
+}
+
+.bold {
+  font-weight: 600;
+}
