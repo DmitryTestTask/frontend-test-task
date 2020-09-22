@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { useRate } from "./useRate";
 import { List } from "./List/List";
-import { connect, useDispatch } from "react-redux";
-import { getMessagesList } from "./fakeApi";
-import { setMessages } from "./store";
-import { IApp, IMessage, IState } from "./types";
+import { fetchMessages } from "./store/actions";
 
+export const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMessages());
+  }, [dispatch]);
+  const isRatesLoaded = useRate();
 
-const App = (props: IApp) => {
-    const [isMessagesLoaded, setIsMessagesLoaded] = useState(false);
-    useEffect(() => {
-        getMessagesList().subscribe((data: any) => {
-            setIsMessagesLoaded(true);
-            props.dispatch(setMessages(data));
-        });
-    }, []);
-    const isRatesLoaded = useRate();
-
-    return isMessagesLoaded && isRatesLoaded ? <List state={props.state}
-                                                     dispatch={props.dispatch}/> :
-                                                <p>We loading rate for u. Wait a bit</p>;
+  return isRatesLoaded ? <List /> : <p>We loading rate for u. Wait a bit</p>;
 };
-
-const mapStateToProps = (state: IState) => ({ state });
-
-export default connect(mapStateToProps)(App);

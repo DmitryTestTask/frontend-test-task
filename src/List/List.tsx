@@ -1,19 +1,20 @@
 import React from "react";
-import { messagesSelector, rateSelector } from "../selectors";
+import { useSelector } from "react-redux";
+
 import { ListItem } from "./ListItem";
-import { IList, IMessage } from "../types";
+import { IMessage } from "../types";
+import { messagesSelector, rateSelector } from "../store/selectors";
 
-export const List = (props: IList) => {
-    const messages = messagesSelector(props.state);
-    const rate = rateSelector(props.state);
+export const List = () => {
+  const messages = useSelector(messagesSelector);
+  const rate = useSelector(rateSelector);
 
-    return <div className='messages-list'>
-        {
-           messages.map((message: IMessage) => <ListItem key={`${message.id}_${Date.now()}`}
-                                                         {...message}
-                                                         dispatch={props.dispatch}
-                                                         rate={rate}/>)
-        }
-    </div>;
+  return (
+    <div className="messages-list">
+      {messages.map((message: IMessage) => (
+        <ListItem key={`${message.id}_${Date.now()}`} {...message} rate={rate} />
+      ))}
+      }
+    </div>
+  );
 };
-
