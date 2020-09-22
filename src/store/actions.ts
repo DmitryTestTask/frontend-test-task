@@ -10,9 +10,7 @@ export type UpdateRateAction = {
   payload: number;
 };
 
-export function setRate(rate: number) {
-  return { type: UPDATE_RATE, payload: rate };
-}
+export const setRate = (rate: number) => ({ type: UPDATE_RATE, payload: rate });
 
 export const MESSAGES = {
   SET_MESSAGES: "SET_MESSAGES",
@@ -20,15 +18,12 @@ export const MESSAGES = {
   INSERT_SERVICE_MESSAGE: "INSERT_SERVICE_MESSAGE",
 };
 
-export function setMessages(messages: Message[]) {
-  return { type: MESSAGES.SET_MESSAGES, messages };
-}
-export function deleteMessage(messageId: number) {
-  return { type: MESSAGES.DELETE_MESSAGE, messageId };
-}
-export function insertServiceMessage(messageId: number) {
-  return { type: MESSAGES.INSERT_SERVICE_MESSAGE, messageId };
-}
+export const setMessages = (messages: Message[]) => ({ type: MESSAGES.SET_MESSAGES, messages });
+export const deleteMessage = (messageId: number) => ({ type: MESSAGES.DELETE_MESSAGE, messageId });
+export const insertServiceMessage = (messageId: number) => ({
+  type: MESSAGES.INSERT_SERVICE_MESSAGE,
+  messageId,
+});
 
 export const fetchMessages = () => (dispatch: Dispatch) => {
   getMessagesList().subscribe((data: Message[]) => {
