@@ -1,10 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 
-import { IListItem, IMessageContent } from "../types";
+import { ListItem, MessageContent } from "../types";
 import { deleteMessage, insertServiceMessage } from "../store/actions";
 
-export const ListItem = ({
+export const ListItemComponent = ({
   canDelete,
   id,
   text,
@@ -12,8 +12,9 @@ export const ListItem = ({
   btcAmount,
   rate,
   messageContent,
-}: IListItem) => {
+}: ListItem) => {
   const dispatch = useDispatch();
+
   const onDeleteClick = useCallback(() => {
     canDelete && dispatch(deleteMessage(id));
   }, [dispatch, canDelete, id]);
@@ -21,13 +22,20 @@ export const ListItem = ({
   const onInsertClick = useCallback(() => {
     dispatch(insertServiceMessage(id));
   }, [dispatch, id]);
-  const deleteButtonClass = `delete-btn ${canDelete ? "" : "delete-btn-disabled"}`;
-  const btc = btcAmount && `${(btcAmount * rate).toFixed(4)}USD`;
-  const itemContent = Array.isArray(messageContent)
-    ? messageContent.map(({ amount, source }: IMessageContent) => (
-        <div key={`${amount}_${Date.now()}`}>{`${source}: ${amount}`}</div>
-      ))
-    : messageContent;
+
+  const deleteButtonClass = useMemo(() => `delete-btn ${canDelete ? "" : "delete-btn-disabled"}`, [
+    canDelete,
+  ]);
+  const btc = useMemo(() => btcAmount && `${(btcAmount * rate).toFixed(4)}USD`, [btcAmount, rate]);
+  const itemContent = useMemo(
+    () =>
+      Array.isArray(messageContent)
+        ? messageContent.map(({ amount, source }: MessageContent) => (
+            <div key={`${amount}_${Date.now()}`}>{`${source}: ${amount}`}</div>
+          ))
+        : messageContent,
+    [messageContent],
+  );
 
   return (
     <div className={`message-item ${messageType}`}>

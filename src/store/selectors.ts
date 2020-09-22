@@ -1,4 +1,4 @@
-import { IMessage, IState } from "../types";
+import { Message, State } from "../types";
 
-export const messagesSelector = (state: IState): IMessage[] => state.messages;
-export const rateSelector = (state: IState) => state.rate;
+export const messagesSelector = (state: State): Message[] => state.messages;
+export const rateSelector = (state: State) => state.rate;

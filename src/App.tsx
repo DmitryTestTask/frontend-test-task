@@ -7,10 +7,11 @@ import { fetchMessages } from "./store/actions";
 
 export const App = () => {
   const dispatch = useDispatch();
+  const isRatesLoaded = useRate();
+
   useEffect(() => {
     dispatch(fetchMessages());
   }, [dispatch]);
-  const isRatesLoaded = useRate();
 
   return isRatesLoaded ? <List /> : <p>We loading rate for u. Wait a bit</p>;
 };

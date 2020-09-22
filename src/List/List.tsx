@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { ListItem } from "./ListItem";
-import { IMessage } from "../types";
+import { ListItemComponent } from "./ListItem";
+import { Message } from "../types";
 import { messagesSelector, rateSelector } from "../store/selectors";
 
 export const List = () => {
@@ -11,8 +11,8 @@ export const List = () => {
 
   return (
     <div className="messages-list">
-      {messages.map((message: IMessage) => (
-        <ListItem key={`${message.id}_${Date.now()}`} {...message} rate={rate} />
+      {messages.map((message: Message) => (
+        <ListItemComponent key={`${message.id}`} {...message} rate={rate} />
       ))}
       }
     </div>

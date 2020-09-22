@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 
-import { IMessage } from "../types";
+import { Message } from "../types";
 import { getMessagesList } from "../fakeApi";
 
 export const UPDATE_RATE = "UPDATE_RATE";
@@ -20,7 +20,7 @@ export const MESSAGES = {
   INSERT_SERVICE_MESSAGE: "INSERT_SERVICE_MESSAGE",
 };
 
-export function setMessages(messages: IMessage[]) {
+export function setMessages(messages: Message[]) {
   return { type: MESSAGES.SET_MESSAGES, messages };
 }
 export function deleteMessage(messageId: number) {
@@ -29,19 +29,18 @@ export function deleteMessage(messageId: number) {
 export function insertServiceMessage(messageId: number) {
   return { type: MESSAGES.INSERT_SERVICE_MESSAGE, messageId };
 }
-export function fetchMessages() {
-  return (dispatch: Dispatch) => {
-    getMessagesList().subscribe((data: IMessage[]) => {
-      dispatch(setMessages(data));
-    });
-  };
-}
 
-export type messagesAction = {
+export const fetchMessages = () => (dispatch: Dispatch) => {
+  getMessagesList().subscribe((data: Message[]) => {
+    dispatch(setMessages(data));
+  });
+};
+
+export type MessagesAction = {
   type:
     | typeof MESSAGES.SET_MESSAGES
     | typeof MESSAGES.DELETE_MESSAGE
     | typeof MESSAGES.INSERT_SERVICE_MESSAGE;
-  messages?: IMessage[];
+  messages?: Message[];
   messageId?: number;
 };

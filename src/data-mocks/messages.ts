@@ -1,6 +1,6 @@
-import { IMessage } from "../types";
+import { Message } from "../types";
 
-const messagesList: IMessage[] = [
+const messagesList: Message[] = [
   {
     id: 0,
     text: "lorem ipsum 1",

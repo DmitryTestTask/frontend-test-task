@@ -1,31 +1,28 @@
-import { Dispatch } from "redux";
-
-export interface IMessage {
+export type Message = {
   id: number;
   text: string;
   canDelete: boolean;
   btcAmount?: number;
-  messageContent?: string | IMessageContent[];
+  messageContent?: string | MessageContent[];
   messageType: string;
 }
 
-export interface IMessageContent {
+export type MessageContent = {
   source: string;
   amount: number;
 }
 
-export interface IState {
+export type State = {
   rate: number;
-  messages: IMessage[];
+  messages: Message[];
 }
 
-export interface IListItem {
+export type ListItem = {
   id: number;
-  text?: string;
-  canDelete?: boolean;
+  text: string;
+  canDelete: boolean;
   btcAmount?: number;
-  messageContent?: string | IMessageContent[];
-  messageType?: string;
-  dispatch?: Dispatch;
+  messageContent?: string | MessageContent[];
+  messageType: string;
   rate: number;
 }
