@@ -14,7 +14,6 @@ export const List = () => {
       {messages.map((message: Message) => (
         <ListItemComponent key={message.id} {...message} rate={rate} />
       ))}
-      }
     </div>
   );
 };
